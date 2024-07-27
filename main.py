@@ -8,8 +8,14 @@ try:
     soup = BeautifulSoup(requests.get(dailyDeal).content, "html.parser")
 
     print("Daily Deal:")
-    print(soup.find(class_=spanName).text)
-    print(soup.find(class_=span).text)
+    itemDaily = soup.find(class_=spanName).text
+    priceDaily = soup.find(class_=span).text
+    earlyPriceDaily = soup.find(class_="sc-812f8453-2 jIIOZg").text
+    print(f"Item: {itemDaily}, with price: {priceDaily}, {earlyPriceDaily}")
+    if soup.find(class_="sc-d5faaad1-0 dXjKKI"):
+        remaining = soup.find(class_="sc-d5faaad1-0 dXjKKI").text
+        print(f"Remaining items: {remaining}")
+
 
     print("Whislist:")
     for item in Wishlist:
